@@ -361,14 +361,14 @@ class Brain:
                  f"{open_cards} open card{'s' if open_cards != 1 else ''}" if open_cards else ""),
             card("diplomat", "diplomat · minimizer", "S0", "Diplomat", "diplomat.py · code", st(live["diplomat"]),
                  "only times leave, never the calendar" if live["diplomat"] else ""),
-            card("memgate", "memory gate", "S1", "Librarian", s1, st("gate" in at, ok1),
+            card("memgate", "memory gate", "S1", "Librarian", _s1_for(s1, GATES), st("gate" in at, ok1),
                  "is this worth remembering?" if "gate" in at else ""),
-            card("judge", "relevance", "S1", "Researcher", s1, st(self.asking > 0, ok1),
+            card("judge", "relevance", "S1", "Researcher", _s1_for(s1), st(self.asking > 0, ok1),
                  "dropping what is surely irrelevant" if self.asking else ""),
-            card("support", "support check", "S1", "Guardian", s1, st(self.asking > 0, ok1),
+            card("support", "support check", "S1", "Guardian", _s1_for(s1), st(self.asking > 0, ok1),
                  "does the answer follow from what it cites?" if self.asking else ""),
-            card("memcheck", "memory checks", "S1", "Memory", s1, st(False, ok1)),
-            card("todo", "to-do filter", "S1", "Planner", s1, st(self.planning > 0, ok1),
+            card("memcheck", "memory checks", "S1", "Memory", _s1_for(s1), st(False, ok1)),
+            card("todo", "to-do filter", "S1", "Planner", _s1_for(s1), st(self.planning > 0, ok1),
                  "is this a real to-do?" if self.planning else ""),
             card("ask", "ask pipeline", "S2", "Researcher", s2, st(self.asking > 0, ok2),
                  "answering a question" if self.asking else ""),
@@ -964,6 +964,16 @@ AGENT_ROWS = {
     "owner": "tier = 'H' AND model NOT LIKE 'owner:watch%%'",
     "watch": "tier = 'H' AND model LIKE 'owner:watch%%'",
 }
+
+
+def _s1_for(spec: str, questions: tuple[str, ...] = ()) -> str:
+    """The System 1 model that answers `questions` under a routed spec ('<default>;<decision>,…=<model>', see
+    judge.make_scorer): the route they all share, else the default."""
+    default, *parts = [x.strip() for x in spec.split(";") if x.strip()] or [spec]
+    routes = {n.strip(): sub.strip() for part in parts for names, _, sub in [part.partition("=")]
+              for n in names.split(",") if n.strip()}
+    chosen = {routes.get(q, default) for q in questions}
+    return chosen.pop() if len(chosen) == 1 else default
 
 
 def agent_for(row: dict) -> str:

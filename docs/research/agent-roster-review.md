@@ -202,3 +202,44 @@ Caveats (H, open questions):
 - No study isolates multi-agent overhead for small local models on one GPU; that argument comes from first principles.
 - The persona null result is from factual QA, not structured extraction.
 - A2ABreak is a formal analysis, not measured exploit rates.
+
+
+## 8. Adapter v2: what was trained and what it changed (28 Sep 2026)
+
+**Labels.** At the owner's request ("do it on your own"), the checks were done by the assistant (Claude subagents)
+on the public Enron data, not by the team. They're stored as source `assistant`, and a human check still wins. They
+were checked against the derived labels: `meeting_request` 82% agreed, `remember` 72%, `fulfilled` 88%,
+`contradicts` 95%. Checked counts, with the number of "yes": `remember` 198 (114), `meeting_request` 200 (62),
+`todo` 135 (90), `fulfilled` 100 (10), `contradicts` 100 (0). The last two have too few positives to learn from and
+were left out.
+
+**Training.** Qwen3-1.7B plus LoRA, starting from the base model with all seven decisions. The new decisions' rows
+were shown four times each. One pass, at an effective batch of 4 (batch 1 × 4-step accumulation, 6-7 GB peak, so
+the 14B can stay loaded).
+
+Two failures along the way, both fixed:
+- **Out of memory:** the 14B was reloaded by the live page during training.
+- **NaN weights:** 15 rows longer than 2,048 tokens lost their masked answer when cut, giving a 0/0 loss.
+  `finetune.fit` now leaves such rows out.
+
+**Held-out results** (`data/results/v2-eval.json`; accuracy · AUROC):
+
+| Decision | v1 | v2 |
+|---|---|---|
+| `remember`, test (32) | 41% · 0.84 | **81% · 0.87** |
+| `remember`, gold 90 | 67% · 0.70 | **80% · 0.86** |
+| `meeting_request` (32) | 66% · 0.62 | **75% · 0.85** |
+| `todo` (26) | 27% · 0.59 | 65% · 0.56 |
+| `supported` (326) | **95.7% · 0.991** | 90.8% · 0.978 |
+| `relevant` (312) | **90.4% · 0.963** | 89.4% · 0.937 |
+| `replied` (290) | **64.1% · 0.705** | 52.1% · 0.654 |
+| `filed` (301) | **50.5%** | 47.5% |
+
+**Decision:** route per decision (`judge.RoutedScorer`). v2 takes `remember` and `meeting_request`, and v1 keeps the
+rest. Planner's `todo` stays on the 14B cascade, since v2 does not rank to-dos better (AUROC 0.56).
+
+The memory gate's pass mark is now per model: 0.05 for v2, chosen on the non-test labels. There it keeps 94–95% of
+memorable emails and passes about 60%. With v1, 99% of non-bulk emails went to extraction.
+
+**Next:** a single v2 without the regression. Train at batch 4 with the 14B unloaded, and repeat the new decisions
+fewer times, or mix in round 1's data in proportion.

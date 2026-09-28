@@ -35,6 +35,14 @@
   function fmt(n) { return typeof n === "number" ? n.toLocaleString("en-US") : String(n == null ? "—" : n); }
   function seeded(str) { var x = 2166136261; for (var i = 0; i < str.length; i++) { x ^= str.charCodeAt(i); x = Math.imul(x, 16777619); } return function () { x ^= x << 13; x ^= x >>> 17; x ^= x << 5; return ((x >>> 0) % 100000) / 100000; }; }
   function anim(el, frames, opts) { if (!el.animate) return { finished: Promise.resolve() }; return el.animate(frames, opts); }
+  /* A model spec as a short name: "mlx:data/models/judge-v1-q4;remember,meeting_request=mlx:…/judge-v2-q4" (a judge
+     routed per decision) reads "judge-v1-q4 + judge-v2-q4"; "qwen3:14b" stays as it is. */
+  function shortModel(spec) {
+    return String(spec || "").split(";").map(function (part) {
+      var m = part.slice(part.indexOf("=") + 1);
+      return m.indexOf("/") >= 0 ? m.slice(m.lastIndexOf("/") + 1) : m;
+    }).join(" + ");
+  }
   function wait(t) { return new Promise(function (r) { setTimeout(r, t); }); }
   /* An animation's end, or its planned end plus a margin, whichever comes first: a browser may pause animations (a
      background tab, a hidden pane, power saving), and nothing the page needs to go on may wait on one. */
@@ -154,7 +162,8 @@
     bar.setCounts = function (c) { Object.keys(c).forEach(function (k) { if (r[k] && c[k] != null) r[k].set(c[k]); }); };
     bar.setModels = function (s1, s2) {
       var m = bar.querySelector(".eg-topbar-models"); m.textContent = "";
-      m.append(TierChip({ tier: "S1", model: s1, onTile: true }), TierChip({ tier: "S2", model: s2, onTile: true }));
+      m.append(TierChip({ tier: "S1", model: shortModel(s1), onTile: true }), TierChip({ tier: "S2", model: shortModel(s2), onTile: true }));
+      m.title = "S1 " + s1 + "\nS2 " + s2;                  // the full spec, e.g. which decisions go to which judge
     };
     bar.setPending = setPending;
     return bar;
@@ -340,7 +349,7 @@
         onClick: function () { p.onSelect && p.onSelect(b._a, b); } },
         a.device ? Icon("watch", { size: "sm" }) : h("span", { class: "eg-dot", "aria-hidden": "true" }),
         h("span", { class: "n" }, a.role ? h("span", { class: "role", text: a.role }) : null, a.name),
-        h("span", { class: "meta" }, h("span", { class: "st", text: STATUS_LABEL[status] || status }), h("span", { class: "mdl", text: a.model || a.task || "" })),
+        h("span", { class: "meta" }, h("span", { class: "st", text: STATUS_LABEL[status] || status }), h("span", { class: "mdl", text: shortModel(a.model) || a.task || "", title: a.model || null })),
         a.pending ? h("span", { class: "badge", text: String(a.pending), "aria-hidden": "true" }) : null);
       b._a = a; return b;
     }

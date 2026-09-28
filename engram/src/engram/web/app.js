@@ -273,3 +273,4 @@ async function openPalette() {
 on("agents", (a) => { state.agents = a; });
 
 boot();
+if (new URLSearchParams(location.search).has("demo")) import("./demo.js").then((m) => m.start());   // presenter mode

@@ -151,9 +151,38 @@ class MLXScorer:
         return {k: _logsumexp([float(logprobs[i]) for i in self._variants(k)]) for k in keys}
 
 
+class RoutedScorer:
+    """One System 1 per decision: a default model, and others for the decisions they are measured better on (adapter
+    v2 wins on `remember` and `meeting_request` but loses ground on round 1's decisions, data/results/v2-eval.json).
+    The judge asks `route(question)` for the scorer to use; the ledger records which model answered."""
+
+    def __init__(self, default: Scorer, routes: Mapping[str, Scorer]):
+        self.default, self.routes, self.model = default, dict(routes), default.model
+
+    def route(self, question: str) -> Scorer:
+        return self.routes.get(question, self.default)
+
+    def score(self, system: str, user: str, keys: Sequence[str]) -> dict[str, float]:
+        return self.default.score(system, user, keys)
+
+
 def make_scorer(spec: str, ollama_url: str) -> Scorer:
     """'qwen3:1.7b' is an Ollama model; 'mlx:<checkpoint>[@<adapter dir>]' runs in-process with MLX (a relative
-    adapter directory is inside the project)."""
+    adapter directory is inside the project). '<default>;<decision>,<decision>=<spec>;…' routes those decisions to
+    another model (RoutedScorer), each distinct model loaded once."""
+    if ";" in spec:
+        default, *parts = [x.strip() for x in spec.split(";") if x.strip()]
+        loaded = {default: make_scorer(default, ollama_url)}
+        routes: dict[str, Scorer] = {}
+        for part in parts:
+            names, _, sub = part.partition("=")
+            sub = sub.strip()
+            if not sub:
+                raise ValueError(f"route {part!r} is not '<decision>,…=<model>'")
+            if sub not in loaded:                       # each model once (an MLX model is ~1 GB)
+                loaded[sub] = make_scorer(sub, ollama_url)
+            routes.update({n.strip(): loaded[sub] for n in names.split(",") if n.strip()})
+        return RoutedScorer(loaded[default], routes)
     if spec.startswith("mlx:"):
         from .config import ROOT
 
@@ -265,6 +294,8 @@ class Judge:
 
     def answer(self, tier: str, scorer: Scorer, q: Question, state: str, subject: str) -> Answer:
         """One model's answer: from the ledger if this model already answered this exact prompt, else scored."""
+        if isinstance(scorer, RoutedScorer):
+            scorer = scorer.route(q.name)
         user = q.render(state)
         key = _sha256(f"{q.name}\x1f{SYSTEM}\x1f{user}")
         row = self.conn.execute("SELECT logprobs FROM judgements WHERE question = %s AND input_hash = %s "

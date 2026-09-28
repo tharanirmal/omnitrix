@@ -123,3 +123,25 @@ def test_no_escalation_where_s2_is_measured_no_better(db_url):
         v = judge.ask(noul("personal", "Will they reply?"), "an email", "item:1")
         w = judge.ask(noul("other", "Is it?"), "an email", "item:1")   # no measurement: escalates as usual
     assert (v.tier, v.settled, big.calls) == ("S1", False, 1) and w.tier == "S2"
+
+
+def test_a_routed_scorer_sends_each_decision_to_its_own_model(monkeypatch):
+    """ENGRAM_JUDGE_MODEL='<default>;remember,meeting_request=<v2>': v2 only where it was measured better."""
+    from engram import judge as jd
+
+    made = []
+
+    class Fake:
+        def __init__(self, url, model):
+            self.model = model
+            made.append(model)
+
+        def score(self, system, user, keys):
+            return {k: 0.0 for k in keys}
+
+    monkeypatch.setattr(jd, "OllamaScorer", Fake)
+    r = jd.make_scorer("v1; remember, meeting_request = v2 ; todo=v2", "http://x")
+    assert isinstance(r, jd.RoutedScorer) and r.model == "v1" and made == ["v1", "v2"]    # v2 loaded once
+    assert r.route("remember").model == "v2" and r.route("todo").model == "v2" and r.route("supported").model == "v1"
+    with pytest.raises(ValueError):
+        jd.make_scorer("v1;remember", "http://x")

@@ -69,6 +69,8 @@ INJECTION = re.compile(r"ignore (all |any )?(previous|prior|above) (instructions
                        r"\bassistant:|developer mode|jailbreak|call the tool|execute the following", re.I)
 PASS = 0.2           # S1 P(remember) below this is not extracted: keeps 93-95% of memorable items (LR §10.7)
 SURE = 0.5           # between PASS and SURE the gate is unsure: extracted, and queued for the owner's verdict
+PASS_AT = {"mlx:judge-v2-q4": 0.05}   # per model: adapter v2 keeps 94-95% of memorable items at 0.05 and passes
+                                      # ~60% (non-test labels and the 90 gold; data/results/v2-eval.json)
 
 
 def bulk(r: dict[str, Any]) -> bool:
@@ -170,11 +172,11 @@ def _scan(conn: psycopg.Connection, judge: Judge, extractor: Extractor, model: s
         conn.execute("INSERT INTO labels (question, subject, value, source) VALUES ('remember', %s, 'yes', 'human') "
                      "ON CONFLICT (question, subject, source) DO UPDATE SET value = 'yes'", (f"item:{r['id']}",))
     is_bulk = not owner_says and bulk(r)
-    p = 1.0 if owner_says else 0.0 if is_bulk else _p_remember(judge, text, r["id"])
+    p, pass_at = (1.0, PASS) if owner_says else (0.0, PASS) if is_bulk else _p_remember(judge, text, r["id"])
     stats.bulk += is_bulk
     if not is_bulk:
         stats.fulfilled += _check_fulfilled(conn, judge, r, text)
-    if p >= PASS:
+    if p >= pass_at:
         stats.passed += 1
         stats.extraction_calls += 1
         if p < SURE:
@@ -193,12 +195,14 @@ def _scan(conn: psycopg.Connection, judge: Judge, extractor: Extractor, model: s
     stats.scanned += 1
 
 
-def _p_remember(judge: Judge, text: str, item_id: int) -> float:
-    """S1's P(worth remembering), from the small judge alone: the gate is recall-first, and precision comes from
-    extraction (which may find nothing) and the owner's review."""
+def _p_remember(judge: Judge, text: str, item_id: int) -> tuple[float, float]:
+    """S1's P(worth remembering), from the small judge alone, and the pass mark for the model that answered: the gate
+    is recall-first, and precision comes from extraction (which may find nothing) and the owner's review."""
     tier, scorer = ("S1", judge.s1) if judge.s1 else ("S2", judge.s2)
     a = judge.answer(tier, scorer, REMEMBER, text, f"item:{item_id}")
-    return a.probs.get("yes", 0.0) if a.logprobs else 1.0         # no valid answer: extract rather than lose it
+    if not a.logprobs:                                  # no valid answer: extract rather than lose it
+        return 1.0, PASS
+    return a.probs.get("yes", 0.0), PASS_AT.get(a.model, PASS)
 
 
 def _extract(extractor: Extractor, model: str, prompt: str, stats: MemoryStats) -> list[dict[str, str]]:
