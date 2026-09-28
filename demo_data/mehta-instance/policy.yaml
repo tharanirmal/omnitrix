@@ -1,0 +1,12 @@
+# What Mehta's secretary may share with other people's agents.
+share:
+  - free_busy        # only "free" / "busy" windows
+  - trip_purpose
+never_share:
+  - meeting titles
+  - other clients' names
+  - prices, volumes, payment terms
+preferences:
+  - Prefers mornings for site visits.
+  - Needs about 1.5 hours to drive from central Bengaluru to Hosur.
+max_proposals_per_round: 3

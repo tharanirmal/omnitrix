@@ -1,0 +1,66 @@
+# Ravi's calendar for the demo week (Mon 5 - Fri 9 Oct 2026) and the week after (for the Diplomat).
+# Times are Asia/Kolkata. kind: meeting | focus | personal | travel | hold | task
+# flexible: false = the Planner must never move it.
+timezone: Asia/Kolkata
+
+recurring:
+  - {id: rec_gym, title: Gym, start: "07:00", end: "08:00", kind: personal, flexible: false,
+     weekdays: [mon, tue, wed, thu, fri], from: 2026-10-05, until: 2026-10-16}
+  - {id: rec_dinner, title: Family dinner, start: "20:00", end: "21:00", kind: personal, flexible: false,
+     weekdays: [mon, tue, wed, thu, fri], from: 2026-10-05, until: 2026-10-16,
+     except: [2026-10-09]}   # Friday 9 Oct is the anniversary dinner below
+
+events:
+  # ---- Monday 5 Oct
+  - {id: cal_0501, title: Leadership meeting, start: "2026-10-05T10:00", end: "2026-10-05T11:30", kind: meeting,
+     flexible: false, attendees: [ent_priya, ent_arjun, ent_meera, ent_rohit, ent_kavya],
+     location: Office - board room}
+  - {id: cal_0502, title: Diwali campaign review, start: "2026-10-05T15:00", end: "2026-10-05T16:00", kind: meeting,
+     flexible: true, attendees: [ent_meera]}
+
+  # ---- Tuesday 6 Oct
+  - {id: cal_0601, title: London export - market research, start: "2026-10-06T11:00", end: "2026-10-06T12:00",
+     kind: focus, flexible: true}
+  - {id: cal_0602, title: Investor prep with Priya, start: "2026-10-06T16:00", end: "2026-10-06T17:00", kind: meeting,
+     flexible: false, attendees: [ent_priya]}
+
+  # ---- Wednesday 7 Oct
+  - {id: cal_0701, title: Drive to Hosur, start: "2026-10-07T08:30", end: "2026-10-07T10:00", kind: travel, flexible: false}
+  - {id: cal_0702, title: Hosur factory review, start: "2026-10-07T10:00", end: "2026-10-07T13:00", kind: meeting,
+     flexible: false, attendees: [ent_arjun], location: Hosur factory}
+  - {id: cal_0703, title: Drive back from Hosur, start: "2026-10-07T13:00", end: "2026-10-07T14:30", kind: travel,
+     flexible: false}
+  - {id: cal_0704, title: 1:1 with Rohit, start: "2026-10-07T17:00", end: "2026-10-07T17:30", kind: meeting,
+     flexible: true, attendees: [ent_rohit]}
+
+  # ---- Thursday 8 Oct (demo day)
+  - {id: cal_0801, title: Investor call - Horizon Ventures, start: "2026-10-08T11:30", end: "2026-10-08T12:15",
+     kind: meeting, flexible: false, attendees: [ent_sanjay, ent_neha], location: "https://meet.example/horizon-sa"}
+  - {id: cal_0802, title: Lunch, start: "2026-10-08T13:00", end: "2026-10-08T14:00", kind: personal, flexible: true}
+  - {id: cal_0803, title: Team sync (weekly), start: "2026-10-08T14:00", end: "2026-10-08T15:00", kind: meeting,
+     flexible: true, attendees: [ent_priya, ent_arjun, ent_meera, ent_rohit]}
+  - {id: cal_0804, title: Line 2 vendor call - Precision Pack, start: "2026-10-08T15:30", end: "2026-10-08T16:30",
+     kind: meeting, flexible: false, attendees: [ent_arjun]}
+  # 17:00-17:30 is deliberately free (scenario S1)
+
+  # ---- Friday 9 Oct
+  - {id: cal_0901, title: Kaveri Bank - renewal review, start: "2026-10-09T10:00", end: "2026-10-09T11:00",
+     kind: meeting, flexible: false, attendees: [ent_deepa, ent_priya]}
+  - {id: cal_0902, title: Weekly sales review, start: "2026-10-09T12:00", end: "2026-10-09T13:00", kind: meeting,
+     flexible: true, attendees: [ent_rohit]}
+  - {id: cal_0903, title: Interview - Head of Sales candidate, start: "2026-10-09T15:00", end: "2026-10-09T15:45",
+     kind: meeting, flexible: false, attendees: [ent_kavya]}
+  - {id: cal_0904, title: Anniversary dinner - Coastal Table, start: "2026-10-09T20:00", end: "2026-10-09T22:00",
+     kind: personal, flexible: false, attendees: [ent_lakshmi]}
+
+  # ---- Next week (Mon 12 - Fri 16 Oct) - gives the Diplomat something to negotiate around
+  - {id: cal_1201, title: Safety inspection - Hosur, start: "2026-10-12T09:00", end: "2026-10-12T13:00", kind: meeting,
+     flexible: false, attendees: [ent_arjun], location: Hosur factory}
+  - {id: cal_1301, title: Board prep with Priya, start: "2026-10-13T10:00", end: "2026-10-13T12:30", kind: meeting,
+     flexible: true, attendees: [ent_priya]}
+  - {id: cal_1401, title: Horizon Ventures - partner meeting, start: "2026-10-14T14:00", end: "2026-10-14T17:00",
+     kind: meeting, flexible: false, attendees: [ent_sanjay], location: Horizon Ventures office}
+  - {id: cal_1501, title: SnackExpo Bengaluru (stall), start: "2026-10-15T09:00", end: "2026-10-15T18:00",
+     kind: meeting, flexible: false, location: City Exhibition Centre}
+  - {id: cal_1601, title: Interview - Head of Sales (round 2), start: "2026-10-16T10:00", end: "2026-10-16T11:00",
+     kind: meeting, flexible: false, attendees: [ent_kavya]}

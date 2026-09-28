@@ -1,0 +1,26 @@
+# engram's own Postgres + pgvector, separate from anything else on the machine (port 5433, own volume).
+name: engram
+services:
+  db:
+    # pinned: pgvector 0.8.6 on Postgres 17 (hnsw.iterative_scan needs pgvector >= 0.8)
+    image: pgvector/pgvector:pg17@sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f
+    environment:
+      POSTGRES_USER: engram
+      POSTGRES_PASSWORD: engram
+      POSTGRES_DB: engram
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - engram-pg:/var/lib/postgresql/data
+    # HNSW builds are fastest when the graph fits in maintenance_work_mem. Parallel builds place it in shared
+    # memory, and Docker's default /dev/shm (64 MB) makes them fail with "No space left on device".
+    command: ["postgres", "-c", "shared_buffers=1GB", "-c", "maintenance_work_mem=1GB", "-c", "max_wal_size=4GB"]
+    shm_size: 2gb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U engram -d engram"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  engram-pg:

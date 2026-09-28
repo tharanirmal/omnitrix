@@ -1,0 +1,37 @@
+# Earlier decisions the Historian knows about. The source notes live in obsidian-vault/Meetings/.
+decisions:
+  - id: dec_01
+    what: Hire a Head of Sales by the end of November.
+    why: Rohit is stretched across Mumbai and Chennai; the Series A plan assumes a sales head.
+    alternatives_rejected: [Promote from within this year]
+    decided_by: ent_ravi
+    decided_at: "2026-09-15T11:00:00+05:30"
+    revisit_at: null
+    source: null
+
+  - id: dec_02
+    what: No new vendors this quarter (until 31 December 2026).
+    why: Protect cash flow and avoid onboarding risk until the Series A closes.
+    alternatives_rejected: [Switch Diwali packaging to FreshWrap (12% cheaper, untested)]
+    decided_by: ent_ravi
+    decided_at: "2026-09-22T16:00:00+05:30"
+    revisit_at: "2027-01-05T10:00:00+05:30"
+    source: "Meetings/2026-09-22 Packaging review.md"
+
+  - id: dec_03
+    what: Raise a Series A of ₹15 Cr with Horizon Ventures as lead investor.
+    why: Fund Hosur Line 2 and the export push.
+    alternatives_rejected: [Bank debt only]
+    decided_by: ent_ravi
+    decided_at: "2026-09-29T18:00:00+05:30"
+    revisit_at: null
+    source: null
+
+  - id: dec_04
+    what: Maximum discount of 6% on distributor orders above ₹15 L.
+    why: Raw material prices went up; margins are thin before Diwali.
+    alternatives_rejected: [Match last year's 8% Diwali discount]
+    decided_by: ent_ravi
+    decided_at: "2026-10-05T11:15:00+05:30"
+    revisit_at: "2027-01-05T10:00:00+05:30"
+    source: "Meetings/2026-10-05 Leadership meeting.md"

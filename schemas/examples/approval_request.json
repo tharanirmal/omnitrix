@@ -1,0 +1,14 @@
+{
+  "approval_id": "appr_12",
+  "requested_by_agent": "operator",
+  "action": "email.reply_in_thread",
+  "risk": "red",
+  "title": "Meeting request",
+  "summary": "Mehta (client) · Today 5:00 PM · You're free",
+  "preview": "Hi Mehta, 5 PM works for me. See you on the call.",
+  "buttons": ["accept", "decline", "suggest_other_time"],
+  "token": null,
+  "expires_at": "2026-10-08T16:55:00+05:30",
+  "status": "pending",
+  "correlation_id": "story_mr_4"
+}

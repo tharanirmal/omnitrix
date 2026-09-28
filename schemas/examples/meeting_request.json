@@ -1,0 +1,16 @@
+{
+  "meeting_request_id": "mr_4",
+  "email_id": "em_55",
+  "requester_entity_id": "ent_7",
+  "proposed_start": "2026-10-08T17:00:00+05:30",
+  "proposed_end": "2026-10-08T17:30:00+05:30",
+  "time_text": "at 5 PM today",
+  "timezone": null,
+  "topic": "Q4 order",
+  "link": "https://meet.example/abc",
+  "availability": {"free": true, "conflicts": [], "alternatives": []},
+  "held_event_id": "cal_88",
+  "status": "awaiting_approval",
+  "reply_email_id": null,
+  "correlation_id": "story_mr_4"
+}

@@ -1,0 +1,218 @@
+{
+  "$defs": {
+    "Availability": {
+      "additionalProperties": false,
+      "properties": {
+        "free": {
+          "title": "Free",
+          "type": "boolean"
+        },
+        "conflicts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Conflicts",
+          "type": "array"
+        },
+        "alternatives": {
+          "items": {
+            "$ref": "#/$defs/Slot"
+          },
+          "title": "Alternatives",
+          "type": "array"
+        }
+      },
+      "required": [
+        "free"
+      ],
+      "title": "Availability",
+      "type": "object"
+    },
+    "Slot": {
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "format": "date-time",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "format": "date-time",
+          "title": "End",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "Slot",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "meeting_request_id": {
+      "title": "Meeting Request Id",
+      "type": "string"
+    },
+    "email_id": {
+      "title": "Email Id",
+      "type": "string"
+    },
+    "requester_entity_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Requester Entity Id"
+    },
+    "proposed_start": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Proposed Start"
+    },
+    "proposed_end": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Proposed End"
+    },
+    "time_text": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time Text"
+    },
+    "timezone": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Timezone"
+    },
+    "topic": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Topic"
+    },
+    "link": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Link"
+    },
+    "availability": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Availability"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "held_event_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Held Event Id"
+    },
+    "status": {
+      "default": "new",
+      "enum": [
+        "new",
+        "checked",
+        "held",
+        "awaiting_approval",
+        "accepted",
+        "declined",
+        "counter_proposed",
+        "expired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "reply_email_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reply Email Id"
+    },
+    "correlation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Correlation Id"
+    }
+  },
+  "required": [
+    "meeting_request_id",
+    "email_id"
+  ],
+  "title": "MeetingRequest",
+  "type": "object"
+}

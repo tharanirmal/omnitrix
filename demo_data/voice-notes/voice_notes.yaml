@@ -1,0 +1,31 @@
+# Voice notes Ravi recorded on his phone. `demo_data/build.py` turns each transcript into a 16 kHz WAV
+# with macOS text-to-speech (voice: Rishi, en_IN) so whisper.cpp has real audio to transcribe.
+# `transcript` is the ground truth for checking the speech-to-text step.
+voice_notes:
+  - id: v01
+    file: v01_call_deepa.wav
+    recorded_at: "2026-10-07T21:40:00+05:30"
+    transcript: "Remind me to call Deepa from Kaveri Bank about the loan papers tomorrow morning."
+    expect:
+      tasks: [{action_type: call, title: Call Deepa about the loan papers, due_at: "2026-10-08T12:00:00+05:30",
+               people: [Deepa Menon]}]
+  - id: v02
+    file: v02_anniversary_table.wav
+    recorded_at: "2026-10-07T22:05:00+05:30"
+    transcript: "Book the table at Coastal Table for our anniversary on Friday at eight."
+    scenario: S15
+    expect:
+      tasks: [{action_type: book, title: Book a table at Coastal Table for the anniversary dinner,
+               due_at: "2026-10-09T12:00:00+05:30", people: [Lakshmi Kumar], personal: true}]
+  - id: v03
+    file: v03_mehta_payment_terms.wav
+    recorded_at: "2026-10-08T07:50:00+05:30"
+    transcript: "Follow up with Mehta about the payment terms sometime next week."
+    expect:
+      tasks: [{action_type: call, title: Follow up with Rajesh Mehta about payment terms, due_at: null,
+               window: "next week", people: [Rajesh Mehta]}]
+  - id: v04
+    file: v04_diwali_combo_idea.wav
+    recorded_at: "2026-10-08T08:05:00+05:30"
+    transcript: "Idea for later. A Diwali combo pack with the new masala chips and the banana chips in one box."
+    expect: {tasks: 0, note: "An idea, not a task"}

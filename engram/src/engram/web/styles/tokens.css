@@ -1,0 +1,124 @@
+/* engram tokens. Dark is the observatory theme the page starts in; light is optional (docs/design.md §2). */
+@font-face { font-family: "Instrument Sans"; src: url("/vendor/fonts/InstrumentSans-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("/vendor/fonts/InstrumentSans-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("/vendor/fonts/InstrumentSans-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("/vendor/fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("/vendor/fonts/JetBrainsMono-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+/* Colours follow docs/design.md §2: ink and graphite surfaces, one warm off-white for text, and the four tier colours
+   as the only accents (S0 steel, S1 cyan, S2 violet, H amber), plus ok/bad used sparingly. The token names are the
+   components' own; the values are design.md's. Light is warm paper with the tier hues darkened to AA on it (the
+   *-text tokens); instrument tiles stay graphite in both themes, so tiers on tiles use the bright hues. */
+:root, [data-theme="light"] {
+  --canvas: #F4F1EA;
+  --canvas-parchment: #ECE8DF;
+  --surface-pearl: #FAF8F3;
+  --surface-chip-translucent: rgba(218, 213, 202, 0.72);
+  --ink: #1B1A17;
+  --ink-muted-80: #3A3833;
+  --ink-muted: #66625A;
+  --ink-muted-48: #77736A;
+  --text-faint: #8F8A7F;
+  --hairline: #DAD5CA;
+  --divider-soft: #E7E3DA;
+  --control-border: #8F8A7F;
+  --tile-1: #0E1015;
+  --tile-2: #1B1F2A;
+  --tile-3: #151821;
+  --void: #07080B;
+  --on-tile: #ECE8DF;
+  --on-tile-muted: #9A9689;
+  --tile-hairline: #232733;
+  --tile-control: #3A3F4D;
+  --primary: #1B1A17;
+  --on-primary: #F4F1EA;
+  --link: #1B1A17;
+  --link-on-tile: #ECE8DF;
+  --focus-ring: #1B1A17;
+  --tier-s0: #8C96A8;
+  --tier-s1: #46D2E0;
+  --tier-s2: #A393FF;
+  --tier-h: #F3B64A;
+  --tier-s0-text: #56657A;
+  --tier-s1-text: #0B6F7A;
+  --tier-s2-text: #5B45C9;
+  --tier-h-text: #8A5300;
+  --ok: #1E7A46;
+  --ok-on-tile: #6FCF97;
+  --danger: #B3261E;
+  --danger-on-tile: #FF7A6B;
+  --scrim: rgba(27, 26, 23, 0.35);
+  --shadow-object: 0 12px 40px 0 rgba(0, 0, 0, 0.18);
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --canvas: #07080B;
+  --canvas-parchment: #0E1015;
+  --surface-pearl: #151821;
+  --surface-chip-translucent: rgba(21, 24, 33, 0.78);
+  --ink: #ECE8DF;
+  --ink-muted-80: #C9C4B8;
+  --ink-muted: #9A9689;
+  --ink-muted-48: #7F7B72;
+  --text-faint: #5F5C55;
+  --hairline: #232733;
+  --divider-soft: #181B24;
+  --control-border: #3A3F4D;
+  --tile-1: #0E1015;
+  --tile-2: #1B1F2A;
+  --tile-3: #151821;
+  --void: #07080B;
+  --on-tile: #ECE8DF;
+  --on-tile-muted: #9A9689;
+  --tile-hairline: #232733;
+  --tile-control: #3A3F4D;
+  --primary: #ECE8DF;
+  --on-primary: #07080B;
+  --link: #ECE8DF;
+  --link-on-tile: #ECE8DF;
+  --focus-ring: #ECE8DF;
+  --tier-s0: #8C96A8;
+  --tier-s1: #46D2E0;
+  --tier-s2: #A393FF;
+  --tier-h: #F3B64A;
+  --tier-s0-text: var(--tier-s0);
+  --tier-s1-text: var(--tier-s1);
+  --tier-s2-text: var(--tier-s2);
+  --tier-h-text: var(--tier-h);
+  --ok: #6FCF97;
+  --ok-on-tile: #6FCF97;
+  --danger: #FF7A6B;
+  --danger-on-tile: #FF7A6B;
+  --scrim: rgba(0, 0, 0, 0.55);
+  --shadow-object: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+:root {
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 17px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+  --space-section: 80px;
+  --radius-none: 0px;
+  --radius-xs: 5px;
+  --radius-sm: 8px;
+  --radius-md: 11px;
+  --radius-lg: 18px;
+  --radius-pill: 9999px;
+  --dur-s0: 60ms;
+  --dur-s1: 140ms;
+  --dur-s2: 900ms;
+  --dur-h: 1100ms;
+  --dur-ui-fast: 150ms;
+  --dur-ui: 240ms;
+  --dur-ui-slow: 400ms;
+  --dur-physics: 1600ms;
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-s0: steps(3, end);
+  --ease-s2: cubic-bezier(0.65, 0, 0.35, 1);
+  --font-sans: "Instrument Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}

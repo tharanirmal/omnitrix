@@ -1,0 +1,40 @@
+# The user of the demo. Everything here is fictional.
+name: Ravi Kumar
+email: ravi@suryodayafoods.example
+entity_id: ent_ravi
+role: Founder & Managing Director
+company: Suryodaya Foods Pvt Ltd   # packaged snacks, 120 employees, factory in Hosur
+city: Bengaluru
+timezone: Asia/Kolkata
+
+demo:
+  week_start: 2026-10-05          # Monday
+  today: 2026-10-08               # Thursday - the demo day
+  clock_start: "2026-10-08T08:55:00+05:30"
+
+# Loaded into Mem0 as habits and preferences (the Planner, Writer and Herald read these).
+habits:
+  - text: Goes to the gym 7-8 AM every weekday; never move it.
+    used_by: [planner]
+  - text: Deep-focus time is 9-11 AM; no calls or meetings then.
+    used_by: [planner]
+  - text: Work hours are 10 AM to 7 PM.
+    used_by: [planner]
+  - text: Family dinner at 8 PM every day is protected.
+    used_by: [planner]
+  - text: No meetings on Friday after 4 PM.
+    used_by: [planner]
+  - text: Prefers a short call over a long email thread.
+    used_by: [writer, planner]
+  - text: Writes short, polite emails and signs off "Best, Ravi"; calls Rajesh Mehta "Rajesh ji".
+    used_by: [writer]
+  - text: A customer quote takes him about 45 minutes; a proposal or deck update about 2 hours.
+    used_by: [planner]
+  - text: Replies fast to Rajesh Mehta and to investors; vendors can wait a day.
+    used_by: [herald, planner]
+  - text: Friday 9 October is his wedding anniversary; nothing after 7:30 PM that day.
+    used_by: [planner]
+
+work_hours: {start: "10:00", end: "19:00"}
+focus_time: {start: "09:00", end: "11:00"}
+quiet_hours: {start: "22:00", end: "08:00"}

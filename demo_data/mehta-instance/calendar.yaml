@@ -1,0 +1,12 @@
+# Mehta's calendar for 12-16 Oct (his secretary shares only free/busy from this).
+timezone: Asia/Kolkata
+events:
+  - {id: m_1201, title: Warehouse audit - Mumbai, start: "2026-10-12T09:00", end: "2026-10-12T18:00"}
+  - {id: m_1301, title: Flight Mumbai to Bengaluru, start: "2026-10-13T06:30", end: "2026-10-13T08:30"}
+  - {id: m_1302, title: Meeting with a Bengaluru retailer, start: "2026-10-13T11:00", end: "2026-10-13T13:00"}
+  - {id: m_1401, title: Distributor meet - Bengaluru, start: "2026-10-14T15:00", end: "2026-10-14T18:00"}
+  - {id: m_1402, title: Flight Bengaluru to Mumbai, start: "2026-10-14T20:30", end: "2026-10-14T22:30"}
+  - {id: m_1501, title: Office - Mumbai, start: "2026-10-15T10:00", end: "2026-10-15T18:00"}
+# Overlap with Ravi's free time: Tue 13 Oct 14:00-18:00 and Wed 14 Oct 09:00-13:00 (Ravi has the
+# Horizon meeting 14:00-17:00 on Wed). Mehta prefers mornings -> expected outcome: Wed 14 Oct,
+# leave Bengaluru 9:30, at Hosur 11:00-12:30.

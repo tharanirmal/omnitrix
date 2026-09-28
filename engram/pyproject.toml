@@ -1,0 +1,49 @@
+[project]
+name = "engram"
+version = "0.1.0"
+description = "A sovereign second brain: Postgres memory, a calibrated local System 1 judge, and per-person fine-tuning."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = [
+    "dateparser>=1.2",
+    "httpx>=0.27",
+    "numpy>=1.26",
+    "ortools>=9.15.6755",
+    "psycopg[binary]>=3.2",
+    "pyarrow>=17",
+    "pydantic-settings>=2.3",
+    "pyyaml>=6",
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+finetune = ["mlx-lm[train]>=0.31"]      # Apple Silicon only: LoRA training and in-process scoring
+voice = ["mlx-whisper>=0.4.3"]          # Apple Silicon only: the watch's speech, transcribed here (pulls torch)
+
+[project.scripts]
+engram = "engram.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/engram"]
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "db: needs the engram Postgres (docker compose up -d)",
+    "ollama: needs a running Ollama with the configured models",
+]

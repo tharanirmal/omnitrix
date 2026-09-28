@@ -1,0 +1,13 @@
+# A second, small Omnitrix instance playing Rajesh Mehta's AI secretary (scenario S12).
+# It negotiates next week's Hosur plant visit with Ravi's Diplomat agent.
+name: Rajesh Mehta
+email: rajesh@mehtatraders.example
+company: Mehta Traders
+city: Mumbai
+timezone: Asia/Kolkata
+agent_link:
+  name: mehta-secretary
+  talks_to: ravi-diplomat
+trip:
+  in_bengaluru: {from: "2026-10-13T09:00:00+05:30", until: "2026-10-14T18:00:00+05:30"}
+  purpose: Visit the Suryodaya Hosur plant with his son (about 3 hours including travel)

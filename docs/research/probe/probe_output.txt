@@ -1,0 +1,65 @@
+
+=== qwen3:1.7b: accuracy 81% (13/16), Brier 0.139, median wall 34 ms, prefill ~5442 tok/s
+  ok actionable gold=no  P(yes)=0.000 prompt= 187 tok prefill=    49 ms decode=    0 ms wall=    57 ms
+  ok actionable gold=yes P(yes)=0.972 prompt= 186 tok prefill=    32 ms decode=    0 ms wall=    41 ms
+  ok actionable gold=no  P(yes)=0.000 prompt= 153 tok prefill=    27 ms decode=    0 ms wall=    33 ms
+  ok actionable gold=no  P(yes)=0.001 prompt= 169 tok prefill=    29 ms decode=    0 ms wall=    34 ms
+  XX actionable gold=yes P(yes)=0.000 prompt= 184 tok prefill=    30 ms decode=    0 ms wall=    35 ms
+  ok actionable gold=yes P(yes)=0.974 prompt= 169 tok prefill=    29 ms decode=    0 ms wall=    32 ms
+  XX conflict   gold=yes P(yes)=0.215 prompt= 151 tok prefill=    30 ms decode=    0 ms wall=    35 ms
+  ok conflict   gold=no  P(yes)=0.205 prompt= 182 tok prefill=    29 ms decode=    0 ms wall=    33 ms
+  ok conflict   gold=yes P(yes)=0.960 prompt= 141 tok prefill=    29 ms decode=    0 ms wall=    33 ms
+  XX conflict   gold=no  P(yes)=0.751 prompt= 178 tok prefill=    31 ms decode=    0 ms wall=    35 ms
+  ok injection  gold=no  P(yes)=0.054 prompt= 129 tok prefill=    29 ms decode=    0 ms wall=    34 ms
+  ok injection  gold=yes P(yes)=0.993 prompt= 155 tok prefill=    27 ms decode=    0 ms wall=    31 ms
+  ok injection  gold=no  P(yes)=0.000 prompt= 122 tok prefill=    26 ms decode=    0 ms wall=    29 ms
+  ok same_task  gold=yes P(yes)=1.000 prompt= 213 tok prefill=    47 ms decode=    0 ms wall=    51 ms
+  ok same_task  gold=no  P(yes)=0.000 prompt= 226 tok prefill=    29 ms decode=    0 ms wall=    32 ms
+  ok same_task  gold=no  P(yes)=0.000 prompt= 208 tok prefill=    32 ms decode=    0 ms wall=    37 ms
+
+=== qwen3:4b: accuracy 56% (9/16), Brier nan, median wall 68 ms, prefill ~2363 tok/s
+  ok actionable gold=no  P(yes)=nan prompt= 181 tok prefill=   114 ms decode=    0 ms wall=   122 ms
+  XX actionable gold=yes P(yes)=nan prompt= 180 tok prefill=    65 ms decode=    0 ms wall=    69 ms
+  ok actionable gold=no  P(yes)=nan prompt= 147 tok prefill=    59 ms decode=    0 ms wall=    62 ms
+  ok actionable gold=no  P(yes)=nan prompt= 163 tok prefill=    62 ms decode=    0 ms wall=    66 ms
+  XX actionable gold=yes P(yes)=nan prompt= 178 tok prefill=    64 ms decode=    0 ms wall=    68 ms
+  XX actionable gold=yes P(yes)=nan prompt= 163 tok prefill=    62 ms decode=    0 ms wall=    65 ms
+  XX conflict   gold=yes P(yes)=nan prompt= 145 tok prefill=    67 ms decode=    0 ms wall=    72 ms
+  ok conflict   gold=no  P(yes)=nan prompt= 176 tok prefill=    65 ms decode=    0 ms wall=    69 ms
+  XX conflict   gold=yes P(yes)=nan prompt= 135 tok prefill=    62 ms decode=    0 ms wall=    67 ms
+  ok conflict   gold=no  P(yes)=nan prompt= 172 tok prefill=    71 ms decode=    0 ms wall=    76 ms
+  ok injection  gold=no  P(yes)=nan prompt= 123 tok prefill=    63 ms decode=    0 ms wall=    68 ms
+  XX injection  gold=yes P(yes)=nan prompt= 149 tok prefill=    60 ms decode=    0 ms wall=    63 ms
+  ok injection  gold=no  P(yes)=nan prompt= 116 tok prefill=    58 ms decode=    0 ms wall=    62 ms
+  XX same_task  gold=yes P(yes)=nan prompt= 207 tok prefill=   115 ms decode=    0 ms wall=   119 ms
+  ok same_task  gold=no  P(yes)=nan prompt= 220 tok prefill=    63 ms decode=    0 ms wall=    66 ms
+  ok same_task  gold=no  P(yes)=nan prompt= 202 tok prefill=    74 ms decode=    0 ms wall=    80 ms
+
+=== qwen3:14b: accuracy 94% (15/16), Brier 0.061, median wall 198 ms, prefill ~791 tok/s
+  ok actionable gold=no  P(yes)=0.000 prompt= 187 tok prefill=   388 ms decode=    0 ms wall=   394 ms
+  ok actionable gold=yes P(yes)=1.000 prompt= 186 tok prefill=   194 ms decode=    0 ms wall=   198 ms
+  ok actionable gold=no  P(yes)=0.000 prompt= 153 tok prefill=   179 ms decode=    0 ms wall=   182 ms
+  ok actionable gold=no  P(yes)=0.000 prompt= 169 tok prefill=   188 ms decode=    0 ms wall=   192 ms
+  XX actionable gold=yes P(yes)=0.010 prompt= 184 tok prefill=   194 ms decode=    0 ms wall=   198 ms
+  ok actionable gold=yes P(yes)=1.000 prompt= 169 tok prefill=   188 ms decode=    0 ms wall=   192 ms
+  ok conflict   gold=yes P(yes)=0.999 prompt= 151 tok prefill=   201 ms decode=    0 ms wall=   208 ms
+  ok conflict   gold=no  P(yes)=0.000 prompt= 182 tok prefill=   196 ms decode=    0 ms wall=   199 ms
+  ok conflict   gold=yes P(yes)=1.000 prompt= 141 tok prefill=   190 ms decode=    0 ms wall=   196 ms
+  ok conflict   gold=no  P(yes)=0.000 prompt= 178 tok prefill=   212 ms decode=    0 ms wall=   220 ms
+  ok injection  gold=no  P(yes)=0.000 prompt= 129 tok prefill=   189 ms decode=    0 ms wall=   198 ms
+  ok injection  gold=yes P(yes)=1.000 prompt= 155 tok prefill=   181 ms decode=    0 ms wall=   185 ms
+  ok injection  gold=no  P(yes)=0.000 prompt= 122 tok prefill=   177 ms decode=    0 ms wall=   180 ms
+  ok same_task  gold=yes P(yes)=1.000 prompt= 213 tok prefill=   395 ms decode=    0 ms wall=   400 ms
+  ok same_task  gold=no  P(yes)=0.000 prompt= 226 tok prefill=   188 ms decode=    0 ms wall=   195 ms
+  ok same_task  gold=no  P(yes)=0.000 prompt= 208 tok prefill=   220 ms decode=    0 ms wall=   228 ms
+
+=== prefix-cache check (qwen3:4b): long shared prefix, two different items
+  prompt_eval_count=991 prefill=551 ms wall=1874 ms
+  prompt_eval_count=958 prefill=64 ms wall=73 ms
+  prompt_eval_count=974 prefill=69 ms wall=74 ms
+
+=== contrast: full JSON task extraction with qwen3:4b (current Librarian style)
+  output_tokens=105 prefill=72 ms decode=1269 ms wall=1358 ms
+  -> {   "tasks": [     {       "title": "Pick two candidates for interviews",       "action_type": "review",       "due_text": "by Wednesday",       "people": [         "Nikhil Joshi",         "Sara Thomas",         "Imran Sheikh"       ],       "evidence_quote": "Could you pick two of them for Friday's
+  output_tokens=169 prefill=72 ms decode=2039 ms wall=2118 ms
+  -> {   "tasks": [     {       "title": "Check festive demand outlook",       "action_type": "review",       "due_text": "This week",       "people": [         "Ravi Kumar"       ],       "evidence_quote": "festive demand expected to rise 11% year on year in packaged snacks",       "confidence": 0.9    

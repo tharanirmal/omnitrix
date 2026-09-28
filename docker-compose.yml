@@ -1,0 +1,44 @@
+# Local services for Omnitrix. Ollama runs natively on the Mac (it needs the GPU), not in Docker.
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: omnitrix
+      POSTGRES_PASSWORD: omnitrix
+      POSTGRES_DB: omnitrix
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U omnitrix -d omnitrix"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # Local mail server: SMTP on 1025, web inbox + API on 8025. Nothing leaves the machine.
+  mailpit:
+    image: axllent/mailpit
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: "1"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "1"
+    ports:
+      - "127.0.0.1:8025:8025"
+      - "127.0.0.1:1025:1025"
+
+  # Self-hosted push notifications for the phone and Galaxy Watch. Bound to all interfaces so the
+  # phone can reach it over the hotspot / LAN; access control is added with the Herald (Phase 4).
+  ntfy:
+    image: binwiederhier/ntfy
+    command: serve
+    environment:
+      NTFY_BASE_URL: "http://localhost:8080"
+      NTFY_CACHE_FILE: /var/cache/ntfy/cache.db
+    ports:
+      - "8080:80"
+    volumes:
+      - ntfy-cache:/var/cache/ntfy
+
+volumes:
+  pgdata:
+  ntfy-cache:

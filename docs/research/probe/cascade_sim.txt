@@ -1,0 +1,6 @@
+1.7B alone: 13/16, total wall 582 ms
+14B alone : 15/16, total wall 3566 ms
+cascade band (0.2,0.8): 15/16 correct, escalated 3/16, total wall 1209 ms
+cascade band (0.1,0.9): 15/16 correct, escalated 3/16, total wall 1209 ms
+cascade band (0.05,0.95): 15/16 correct, escalated 4/16, total wall 1407 ms
+cascade band (0.02,0.98): 15/16 correct, escalated 7/16, total wall 1993 ms

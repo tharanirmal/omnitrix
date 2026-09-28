@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "title": "Send quote to Mehta",
+      "action_type": "send",
+      "due_text": "by Thursday evening",
+      "due_at": "2026-10-08T18:00:00+05:30",
+      "people": ["Mehta"],
+      "waiting_on_text": "need numbers from finance",
+      "evidence_quote": "Could you send me the quote by Thursday evening?",
+      "confidence": 0.9
+    }
+  ]
+}

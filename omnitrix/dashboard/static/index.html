@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent log · Omnitrix</title>
+  <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Omnitrix <span>dashboard</span></a>
+    <nav>
+      <a class="active" href="/">Agent log</a>
+      <a href="/brain-map" target="_blank" rel="noopener">Brain map</a>
+    </nav>
+    <div class="status">
+      <span id="clock" title="Demo clock"></span>
+      <span id="live" class="live">connecting</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="list-col" aria-label="Log entries">
+      <form id="filters" class="filters" autocomplete="off">
+        <label>Agent <select id="f-agent"><option value="">All agents</option></select></label>
+        <label>Strategy <select id="f-strategy"><option value="">All strategies</option></select></label>
+        <label>From (demo time) <input type="datetime-local" id="f-since" step="1"></label>
+        <label>To (demo time) <input type="datetime-local" id="f-until" step="1"></label>
+        <div class="filter-foot">
+          <span id="count" class="count"></span>
+          <button type="button" id="f-clear" class="btn">Clear filters</button>
+        </div>
+      </form>
+      <ol id="list" class="list" tabindex="0" aria-label="Recalls, newest first"></ol>
+      <button id="more" class="btn more" hidden>Load older entries</button>
+    </section>
+
+    <section id="detail" class="detail-col" aria-live="polite">
+      <div class="empty">Select a question to see what the brain searched and what it returned.</div>
+    </section>
+  </main>
+
+  <script src="/static/agent_log.js"></script>
+</body>
+</html>

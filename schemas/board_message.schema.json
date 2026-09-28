@@ -1,0 +1,62 @@
+{
+  "additionalProperties": false,
+  "description": "Agents talking to each other - shown live as the agent chat room.",
+  "properties": {
+    "message_id": {
+      "title": "Message Id",
+      "type": "string"
+    },
+    "from_agent": {
+      "title": "From Agent",
+      "type": "string"
+    },
+    "to_agent": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "To Agent"
+    },
+    "correlation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Correlation Id"
+    },
+    "text": {
+      "title": "Text",
+      "type": "string"
+    },
+    "refs": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Refs",
+      "type": "object"
+    },
+    "at": {
+      "format": "date-time",
+      "title": "At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "message_id",
+    "from_agent",
+    "text",
+    "at"
+  ],
+  "title": "BoardMessage",
+  "type": "object"
+}

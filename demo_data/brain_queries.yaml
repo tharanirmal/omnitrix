@@ -1,0 +1,63 @@
+# Questions an agent might ask the brain, with the sources that answer them.
+# sources: demo email id (e04), vault path (Meetings/...), or PDF filename. facts: expected structured facts.
+# Used by `omnitrix brain bench` to measure accuracy, speed and how much of the brain each question reads.
+queries:
+  - id: q01
+    agent: historian
+    ask: What did we decide about taking on new vendors this quarter?
+    sources: ["Meetings/2026-09-22 Packaging review.md"]
+    facts: ["decisions:dec_02"]
+  - id: q02
+    agent: promise_keeper
+    ask: What is blocking the revised quote for Rajesh Mehta?
+    sources: [e04, e24, "Projects/Mehta Q4 order.md"]   # the project note states the blocker too
+  - id: q03
+    agent: planner
+    ask: By when does Mehta want the Q4 order quote?
+    sources: [e02, e03]
+  - id: q04
+    agent: planner
+    ask: Which documents does Kaveri Bank need for the loan renewal, and by when?
+    sources: [e08, kaveri_bank_renewal_checklist.pdf]
+  - id: q05
+    agent: fact_checker
+    ask: By how much is GreenPack increasing its prices?
+    sources: [e13, greenpack_price_revision.pdf]
+  - id: q06
+    agent: analyst
+    ask: What happened with the Line 2 machine delivery?
+    sources: [e23, "Meetings/2026-10-07 Hosur factory review.md"]
+  - id: q07
+    agent: promise_keeper
+    ask: Is Rohit usually on time with what he promises?
+    sources: [e16, "Meetings/2026-10-07 1-1 Rohit.md"]
+    facts: ["promises:ent_rohit"]
+  - id: q08
+    agent: fact_checker
+    ask: What is the maximum discount we can give distributors on big orders?
+    sources: ["Meetings/2026-10-05 Leadership meeting.md"]
+    facts: ["decisions:dec_04"]
+  - id: q09
+    agent: planner
+    ask: What does Sanjay want before Thursday's call?
+    sources: [e11, "Meetings/2026-10-06 Investor prep.md"]
+  - id: q10
+    agent: researcher
+    ask: Which Head of Sales candidates did Kavya shortlist?
+    sources: [e06, e22]
+  - id: q11
+    agent: planner
+    ask: What did Neha from Horizon ask for?
+    sources: [e18]
+  - id: q12
+    agent: researcher
+    ask: What are our Series A numbers and how much are we raising?
+    sources: [series_a_pitch_summary.pdf, "Meetings/2026-10-06 Investor prep.md"]
+  - id: q13
+    agent: planner
+    ask: What does Lakshmi want for Friday evening?
+    sources: [e15]
+  - id: q14
+    agent: planner
+    ask: Venkatesh wants to meet about GST - what does he need?
+    sources: [e20]

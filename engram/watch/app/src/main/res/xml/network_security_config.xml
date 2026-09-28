@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The app talks to one host only: the paired Mac, by its private LAN address, which changes from network to
+     network, so it cannot be pinned here. Requests carry a bearer token; see watch/README.md for the trade-off. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

@@ -1,0 +1,353 @@
+{
+  "$defs": {
+    "TaskEffort": {
+      "additionalProperties": false,
+      "properties": {
+        "estimate_minutes": {
+          "default": 30,
+          "minimum": 5,
+          "title": "Estimate Minutes",
+          "type": "integer"
+        },
+        "estimate_basis": {
+          "default": "default",
+          "title": "Estimate Basis",
+          "type": "string"
+        },
+        "energy": {
+          "default": "any",
+          "enum": [
+            "focus",
+            "admin",
+            "any"
+          ],
+          "title": "Energy",
+          "type": "string"
+        },
+        "can_split": {
+          "default": false,
+          "title": "Can Split",
+          "type": "boolean"
+        }
+      },
+      "title": "TaskEffort",
+      "type": "object"
+    },
+    "TaskHistoryEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "at": {
+          "format": "date-time",
+          "title": "At",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "needs_confirmation",
+            "todo",
+            "blocked",
+            "scheduled",
+            "in_progress",
+            "done",
+            "missed",
+            "dropped"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "by": {
+          "title": "By",
+          "type": "string"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "at",
+        "status",
+        "by"
+      ],
+      "title": "TaskHistoryEntry",
+      "type": "object"
+    },
+    "TaskPeople": {
+      "additionalProperties": false,
+      "properties": {
+        "owner": {
+          "default": "me",
+          "title": "Owner",
+          "type": "string"
+        },
+        "requested_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Requested By"
+        },
+        "related": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related",
+          "type": "array"
+        }
+      },
+      "title": "TaskPeople",
+      "type": "object"
+    },
+    "TaskPriority": {
+      "additionalProperties": false,
+      "properties": {
+        "score": {
+          "default": 0,
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Score",
+          "type": "integer"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        }
+      },
+      "title": "TaskPriority",
+      "type": "object"
+    },
+    "TaskSchedule": {
+      "additionalProperties": false,
+      "properties": {
+        "plan_id": {
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "plan_version": {
+          "title": "Plan Version",
+          "type": "integer"
+        },
+        "start": {
+          "format": "date-time",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "format": "date-time",
+          "title": "End",
+          "type": "string"
+        },
+        "flexible": {
+          "default": true,
+          "title": "Flexible",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "plan_id",
+        "plan_version",
+        "start",
+        "end"
+      ],
+      "title": "TaskSchedule",
+      "type": "object"
+    },
+    "TaskSource": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "email_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Email Id"
+        },
+        "evidence_quote": {
+          "title": "Evidence Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "evidence_quote"
+      ],
+      "title": "TaskSource",
+      "type": "object"
+    },
+    "TaskTiming": {
+      "additionalProperties": false,
+      "properties": {
+        "due_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Due At"
+        },
+        "due_type": {
+          "default": "none",
+          "enum": [
+            "hard",
+            "soft",
+            "none"
+          ],
+          "title": "Due Type",
+          "type": "string"
+        },
+        "earliest_start": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Earliest Start"
+        }
+      },
+      "title": "TaskTiming",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "task_id": {
+      "title": "Task Id",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "action_type": {
+      "enum": [
+        "send",
+        "call",
+        "meet",
+        "review",
+        "write",
+        "decide",
+        "pay",
+        "buy",
+        "book",
+        "other"
+      ],
+      "title": "Action Type",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/TaskSource"
+    },
+    "people": {
+      "$ref": "#/$defs/TaskPeople"
+    },
+    "timing": {
+      "$ref": "#/$defs/TaskTiming"
+    },
+    "effort": {
+      "$ref": "#/$defs/TaskEffort"
+    },
+    "priority": {
+      "$ref": "#/$defs/TaskPriority"
+    },
+    "blocked_by": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Blocked By",
+      "type": "array"
+    },
+    "schedule": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TaskSchedule"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "status": {
+      "default": "todo",
+      "enum": [
+        "needs_confirmation",
+        "todo",
+        "blocked",
+        "scheduled",
+        "in_progress",
+        "done",
+        "missed",
+        "dropped"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "times_missed": {
+      "default": 0,
+      "title": "Times Missed",
+      "type": "integer"
+    },
+    "history": {
+      "items": {
+        "$ref": "#/$defs/TaskHistoryEntry"
+      },
+      "title": "History",
+      "type": "array"
+    },
+    "confidence": {
+      "default": 1.0,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "needs_confirmation": {
+      "default": false,
+      "title": "Needs Confirmation",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "task_id",
+    "title",
+    "action_type",
+    "source"
+  ],
+  "title": "Task",
+  "type": "object"
+}

@@ -1,0 +1,114 @@
+{
+  "$defs": {
+    "TaskCandidate": {
+      "additionalProperties": false,
+      "description": "What the Librarian's model extracts from text - only what the text says. Kept small on purpose:\nsmall local models do much better with a short, flat format.",
+      "properties": {
+        "title": {
+          "description": "Short action, verb first: 'Send quote to Mehta'",
+          "maxLength": 120,
+          "title": "Title",
+          "type": "string"
+        },
+        "action_type": {
+          "enum": [
+            "send",
+            "call",
+            "meet",
+            "review",
+            "write",
+            "decide",
+            "pay",
+            "buy",
+            "book",
+            "other"
+          ],
+          "title": "Action Type",
+          "type": "string"
+        },
+        "due_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The exact words used for the deadline, if any",
+          "title": "Due Text"
+        },
+        "due_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Best guess of the deadline as ISO-8601 with offset",
+          "title": "Due At"
+        },
+        "people": {
+          "description": "Names of people involved",
+          "items": {
+            "type": "string"
+          },
+          "title": "People",
+          "type": "array"
+        },
+        "waiting_on_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Anything the task is blocked by",
+          "title": "Waiting On Text"
+        },
+        "evidence_quote": {
+          "description": "The exact sentence the task came from",
+          "title": "Evidence Quote",
+          "type": "string"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        }
+      },
+      "required": [
+        "title",
+        "action_type",
+        "evidence_quote",
+        "confidence"
+      ],
+      "title": "TaskCandidate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "tasks": {
+      "items": {
+        "$ref": "#/$defs/TaskCandidate"
+      },
+      "title": "Tasks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "tasks"
+  ],
+  "title": "TaskCandidateList",
+  "type": "object"
+}

@@ -1,0 +1,113 @@
+{
+  "$defs": {
+    "Subject": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "title": "Subject",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Something that happened. Small payloads (IDs + key facts), past-tense names, never modified.",
+  "properties": {
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "type": {
+      "title": "Type",
+      "type": "string"
+    },
+    "version": {
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "emitted_by": {
+      "title": "Emitted By",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "correlation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Correlation Id"
+    },
+    "caused_by": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Caused By"
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Subject"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "priority": {
+      "default": "normal",
+      "enum": [
+        "low",
+        "normal",
+        "high",
+        "urgent"
+      ],
+      "title": "Priority",
+      "type": "string"
+    },
+    "payload": {
+      "additionalProperties": true,
+      "title": "Payload",
+      "type": "object"
+    }
+  },
+  "required": [
+    "event_id",
+    "type",
+    "occurred_at",
+    "emitted_by",
+    "idempotency_key"
+  ],
+  "title": "Event",
+  "type": "object"
+}

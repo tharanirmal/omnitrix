@@ -1,0 +1,37 @@
+{
+  "task_id": "task_31",
+  "title": "Send quote to Mehta",
+  "action_type": "send",
+  "source": {
+    "source_id": "src_101",
+    "email_id": "em_55",
+    "evidence_quote": "Could you send me the quote by Thursday evening?"
+  },
+  "people": {"owner": "me", "requested_by": "ent_7", "related": ["ent_7", "ent_12"]},
+  "timing": {"due_at": "2026-10-08T18:00:00+05:30", "due_type": "hard", "earliest_start": null},
+  "effort": {"estimate_minutes": 45, "estimate_basis": "your last 4 quotes took 40-50 min", "energy": "focus",
+             "can_split": false},
+  "priority": {
+    "score": 87,
+    "reasons": ["deadline in 1 day (+35)", "requested by a key contact Mehta (+30)", "linked to ₹20 L deal (+15)",
+                "missed once already (+7)"]
+  },
+  "blocked_by": ["p_215"],
+  "schedule": {
+    "plan_id": "plan_2026-10-08",
+    "plan_version": 3,
+    "start": "2026-10-08T12:30:00+05:30",
+    "end": "2026-10-08T13:15:00+05:30",
+    "flexible": true
+  },
+  "status": "scheduled",
+  "times_missed": 1,
+  "history": [
+    {"at": "2026-10-07T09:03:00+05:30", "status": "todo", "by": "librarian", "note": null},
+    {"at": "2026-10-07T09:04:00+05:30", "status": "scheduled", "by": "planner", "note": null},
+    {"at": "2026-10-08T11:00:00+05:30", "status": "missed", "by": "promise_keeper", "note": null},
+    {"at": "2026-10-08T11:00:05+05:30", "status": "scheduled", "by": "planner", "note": "moved to 12:30"}
+  ],
+  "confidence": 0.9,
+  "needs_confirmation": false
+}

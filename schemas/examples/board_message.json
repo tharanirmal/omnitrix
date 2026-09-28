@@ -1,0 +1,9 @@
+{
+  "message_id": "msg_331",
+  "from_agent": "planner",
+  "to_agent": "writer",
+  "correlation_id": "story_mr_4",
+  "text": "5 PM is free, slot held. Please draft an acceptance to Mehta.",
+  "refs": {"meeting_request_id": "mr_4"},
+  "at": "2026-10-08T09:02:17+05:30"
+}

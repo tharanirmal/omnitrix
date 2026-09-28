@@ -1,0 +1,19 @@
+{
+  "event_id": "evt_0901",
+  "type": "meeting_request.detected",
+  "version": 1,
+  "occurred_at": "2026-10-08T09:02:14+05:30",
+  "emitted_by": "librarian",
+  "idempotency_key": "meeting_request:em_55",
+  "correlation_id": "story_mr_4",
+  "caused_by": "evt_0900",
+  "subject": {"kind": "meeting_request", "id": "mr_4"},
+  "priority": "high",
+  "payload": {
+    "meeting_request_id": "mr_4",
+    "email_id": "em_55",
+    "requester_entity_id": "ent_7",
+    "proposed_start": "2026-10-08T17:00:00+05:30",
+    "proposed_end": "2026-10-08T17:30:00+05:30"
+  }
+}

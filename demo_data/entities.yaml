@@ -1,0 +1,115 @@
+# People, organizations and projects in Ravi's world, and how they connect. All fictional.
+# importance: 0 low, 1 regular, 2 important, 3 key (feeds the Planner's priority score)
+
+people:
+  - {id: ent_ravi, name: Ravi Kumar, aliases: [Ravi, RK], importance: 3,
+     details: {self: true, email: ravi@suryodayafoods.example, role: Founder & MD}}
+  - {id: ent_priya, name: Priya Nair, aliases: [Priya], importance: 2,
+     details: {email: priya@suryodayafoods.example, role: Finance Head, internal: true}}
+  - {id: ent_arjun, name: Arjun Rao, aliases: [Arjun], importance: 2,
+     details: {email: arjun@suryodayafoods.example, role: Head of Operations (Hosur factory), internal: true}}
+  - {id: ent_meera, name: Meera Iyer, aliases: [Meera], importance: 2,
+     details: {email: meera@suryodayafoods.example, role: Marketing Head, internal: true}}
+  - {id: ent_rohit, name: Rohit Shetty, aliases: [Rohit], importance: 1,
+     details: {email: rohit@suryodayafoods.example, role: Sales Manager, internal: true}}
+  - {id: ent_kavya, name: Kavya Das, aliases: [Kavya], importance: 1,
+     details: {email: kavya@suryodayafoods.example, role: HR Head, internal: true}}
+  - {id: ent_mehta, name: Rajesh Mehta, aliases: [Mehta, Mehta ji, Rajesh ji, R. Mehta, Rajesh], importance: 3,
+     details: {email: rajesh@mehtatraders.example, role: Managing Director, city: Mumbai,
+               note: Biggest distributor; prefers calls; pays on 45-day terms}}
+  - {id: ent_sanjay, name: Sanjay Kapoor, aliases: [Sanjay], importance: 3,
+     details: {email: sanjay@horizonvc.example, role: Partner}}
+  - {id: ent_neha, name: Neha Gupta, aliases: [Neha], importance: 2,
+     details: {email: neha@horizonvc.example, role: Associate}}
+  - {id: ent_tom, name: Tom Clarke, aliases: [Tom], importance: 2,
+     details: {email: tom.clarke@brightsidegrocers.example, role: Head of Buying, city: London,
+               timezone: Europe/London}}
+  - {id: ent_deepa, name: Deepa Menon, aliases: [Deepa], importance: 2,
+     details: {email: deepa.menon@kaveribank.example, role: Relationship Manager}}
+  - {id: ent_farhan, name: Farhan Ali, aliases: [Farhan], importance: 1,
+     details: {email: farhan@greenpack.example, role: Key Account Manager}}
+  - {id: ent_venkatesh, name: Venkatesh Iyengar, aliases: [Venkatesh, VI], importance: 2,
+     details: {email: venkatesh@viandco.example, role: Chartered Accountant}}
+  - {id: ent_lakshmi, name: Lakshmi Kumar, aliases: [Lakshmi], importance: 3,
+     details: {email: lakshmi.kumar@mailbox.example, relation: wife, personal: true}}
+
+organizations:
+  - {id: ent_suryodaya, name: Suryodaya Foods Pvt Ltd, aliases: [Suryodaya, Suryodaya Foods], importance: 3,
+     details: {self: true, domain: suryodayafoods.example, employees: 120, factory: Hosur}}
+  - {id: ent_mehtatraders, name: Mehta Traders, aliases: [Mehta Traders Mumbai], importance: 3,
+     details: {domain: mehtatraders.example, type: distributor}}
+  - {id: ent_horizon, name: Horizon Ventures, aliases: [Horizon, Horizon VC], importance: 3,
+     details: {domain: horizonvc.example, type: investor}}
+  - {id: ent_brightside, name: Brightside Grocers, aliases: [Brightside], importance: 2,
+     details: {domain: brightsidegrocers.example, type: retailer, country: UK}}
+  - {id: ent_kaveribank, name: Kaveri Bank, aliases: [], importance: 2,
+     details: {domain: kaveribank.example, type: bank}}
+  - {id: ent_greenpack, name: GreenPack Packaging, aliases: [GreenPack], importance: 1,
+     details: {domain: greenpack.example, type: packaging vendor, current_vendor: true}}
+  - {id: ent_freshwrap, name: FreshWrap, aliases: [Fresh Wrap], importance: 0,
+     details: {domain: freshwrap.example, type: packaging vendor, current_vendor: false}}
+  - {id: ent_precisionpack, name: Precision Pack Machines, aliases: [Precision Pack], importance: 1,
+     details: {domain: precisionpack.example, type: machine vendor}}
+  - {id: ent_viandco, name: VI & Co, aliases: [VI and Co], importance: 2,
+     details: {domain: viandco.example, type: chartered accountants}}
+
+projects:
+  - {id: ent_prj_mehta_q4, name: Mehta Q4 order, aliases: [Q4 order, Mehta order], importance: 3,
+     details: {value_inr: 2000000, deadline: "2026-10-08T18:00:00+05:30",
+               summary: 2000 cartons masala chips + 1200 cartons banana chips for Diwali}}
+  - {id: ent_prj_series_a, name: Series A, aliases: [fundraise, the round], importance: 3,
+     details: {value_inr: 150000000, lead: Horizon Ventures}}
+  - {id: ent_prj_line2, name: Hosur Line 2, aliases: [Line 2, Line-2, second line], importance: 2,
+     details: {value_inr: 18000000, summary: Second packing line; filler machine from Precision Pack}}
+  - {id: ent_prj_london, name: London export, aliases: [UK export, Brightside deal], importance: 2,
+     details: {summary: First export listing with Brightside Grocers}}
+  - {id: ent_prj_loan, name: Working capital renewal, aliases: [loan renewal, bank renewal], importance: 2,
+     details: {value_inr: 20000000, deadline: "2026-10-30T17:00:00+05:30"}}
+  - {id: ent_prj_sales_head, name: Sales head hiring, aliases: [sales head], importance: 1,
+     details: {deadline: "2026-11-30T18:00:00+05:30"}}
+  - {id: ent_prj_diwali, name: Diwali combo packs, aliases: [Diwali packs, Diwali run], importance: 2,
+     details: {summary: Festive combo packs; packaging from GreenPack}}
+
+# from, type, to (valid_from optional; open-ended = still true)
+relations:
+  - [ent_ravi, founder_of, ent_suryodaya]
+  - [ent_priya, works_at, ent_suryodaya]
+  - [ent_arjun, works_at, ent_suryodaya]
+  - [ent_meera, works_at, ent_suryodaya]
+  - [ent_rohit, works_at, ent_suryodaya]
+  - [ent_kavya, works_at, ent_suryodaya]
+  - [ent_priya, reports_to, ent_ravi]
+  - [ent_arjun, reports_to, ent_ravi]
+  - [ent_meera, reports_to, ent_ravi]
+  - [ent_rohit, reports_to, ent_ravi]
+  - [ent_kavya, reports_to, ent_ravi]
+  - [ent_mehta, works_at, ent_mehtatraders]
+  - [ent_sanjay, works_at, ent_horizon]
+  - [ent_neha, works_at, ent_horizon]
+  - [ent_tom, works_at, ent_brightside]
+  - [ent_deepa, works_at, ent_kaveribank]
+  - [ent_farhan, works_at, ent_greenpack]
+  - [ent_venkatesh, works_at, ent_viandco]
+  - [ent_lakshmi, family_of, ent_ravi]
+  - [ent_mehtatraders, client_of, ent_suryodaya]
+  - [ent_horizon, investor_in, ent_suryodaya]
+  - [ent_kaveribank, lender_to, ent_suryodaya]
+  - [ent_greenpack, supplier_of, ent_suryodaya]
+  - [ent_precisionpack, supplier_of, ent_suryodaya]
+  - [ent_viandco, advisor_to, ent_suryodaya]
+  - [ent_prj_mehta_q4, for_client, ent_mehtatraders]
+  - [ent_rohit, owns, ent_prj_mehta_q4]
+  - [ent_priya, owns, ent_prj_loan]
+  - [ent_arjun, owns, ent_prj_line2]
+  - [ent_meera, owns, ent_prj_diwali]
+  - [ent_kavya, owns, ent_prj_sales_head]
+  - [ent_ravi, owns, ent_prj_series_a]
+  - [ent_ravi, owns, ent_prj_london]
+  - [ent_prj_series_a, lead_investor, ent_horizon]
+  - [ent_prj_loan, with_bank, ent_kaveribank]
+  - [ent_prj_london, with_client, ent_brightside]
+  - [ent_prj_line2, depends_on, ent_precisionpack]
+  - [ent_prj_diwali, depends_on, ent_greenpack]
+  - [ent_prj_mehta_q4, depends_on, ent_prj_diwali]
+  - [ent_prj_mehta_q4, depends_on, ent_prj_line2]
+  - [ent_prj_loan, depends_on, ent_prj_line2]
