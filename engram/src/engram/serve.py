@@ -594,10 +594,16 @@ class Brain:
                         p = a.probs.get("yes", 0.0) if a.logprobs else 1.0
                         stage("gate", t, f"S1 ({a.model}): P(worth remembering) = {p:.2f}")
                     t = perf_counter()
-                    stats = build(conn, self.judge(), self.llm, s.s2_model, s.owner, s.owner_timezone,
-                                  ids=[run.item], owner_says=[run.item] if owner_says else ())
-                    stage("extracted", t, f"S2 ({s.s2_model}): {stats.beliefs} belief(s)" if stats.passed
-                          else "below the gate's threshold: not extracted")
+                    seen = conn.execute("SELECT 1 FROM memory_scans WHERE item_id = %s", (run.item,)).fetchone()
+                    if seen:                        # the same text again collapses into the same item: read before
+                        n = conn.execute("SELECT count(*) AS n FROM current_beliefs WHERE item_id = %s",
+                                         (run.item,)).fetchone()["n"]
+                        stage("extracted", t, f"already in memory: this item was read before ({n} belief(s))")
+                    else:
+                        stats = build(conn, self.judge(), self.llm, s.s2_model, s.owner, s.owner_timezone,
+                                      ids=[run.item], owner_says=[run.item] if owner_says else ())
+                        stage("extracted", t, f"S2 ({s.s2_model}): {stats.beliefs} belief(s)" if stats.passed
+                              else "below the gate's threshold: not extracted")
                     run.beliefs = [dict(b) for b in conn.execute(
                         "SELECT id, kind, statement, actor, other FROM current_beliefs WHERE item_id = %s",
                         (run.item,))]

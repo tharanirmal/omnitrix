@@ -203,3 +203,5 @@ table.grid td.num { text-align: right; }
 .demo-results b { font-size: 44px; font-weight: 400; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .demo-results span { font-size: 16px; } .demo-results small { font-size: 13px; color: var(--on-tile-muted); }
 @media (max-width: 640px) { .demo-results .grid { grid-template-columns: 1fr; } .demo-results b { font-size: 32px; } }
+body.demo-dim #app { opacity: .18; transition: opacity var(--dur-ui-slow) var(--ease-standard); }
+body.demo-dim .demo-cap { opacity: 0; }

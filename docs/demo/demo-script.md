@@ -2,8 +2,12 @@
 
 A voice script and shot list for the judges' video. The screen part is driven by the page's presenter mode: open
 `http://127.0.0.1:8770/?demo`, and every **→** (or Space) runs the next beat against the real brain and the real
-models. The lower-left caption names each beat, so the video also reads with the sound off. The last beat is the
-smartwatch, which you film with a phone.
+models. The lower-left caption names each beat, so the video also reads with the sound off. The smartwatch is only
+mentioned here (beat 9); its own demo is recorded separately.
+
+A finished screen recording (no sound) is at `~/Movies/engram-demo/engram-demo.mp4`, with each beat's start time in
+`engram-demo.beats.txt`. It was recorded with `docs/demo/record_demo.py`, which drives this presenter mode in a
+Chromium window and captures the frames the page paints; `--from 6` reshoots from beat 6.
 
 - **→ / Space:** next beat. A beat that is still waiting on a model ignores extra presses, so press once and talk.
 - **H:** hide or show the captions. **Esc:** leave presenter mode.
@@ -20,16 +24,14 @@ minute. The **[wait]** marks are where a model is working; keep talking over the
    no `mlx_lm` or `v2_baseline` process). Memory pressure is what slowed the models in the rehearsal.
 2. **Warm the models.** Sign in, then ask the demo question once on the Database view. The 14B and the judge are then
    loaded, and Ask takes about 7 s instead of 25 s. Sign out afterwards.
-3. **The watch.** Wake it, turn **Bluetooth off** (otherwise it drops Wi-Fi when the screen sleeps), and open the engram
-   app. The Agents view should show "watch SM-R905F · seen … ago". Keep it awake during the take.
-4. **The browser.** Use Safari or Chrome, full screen, at 1920×1080 or 1280×800, with no other tabs showing and
+3. **The browser.** Use Safari or Chrome, full screen, at 1920×1080 or 1280×800, with no other tabs showing and
    bookmarks hidden. Open `http://127.0.0.1:8770/?demo` on the sign-in page, in the dark theme.
-5. **Record.** Press ⌘⇧5, choose *Record Selected Portion* around the browser, and under Options pick your microphone
+4. **Record.** Press ⌘⇧5, choose *Record Selected Portion* around the browser, and under Options pick your microphone
    if you want the voice live. Or record the screen silently and the voice afterwards with QuickTime or Voice Memos.
    Start the recording, wait two seconds, then press **→**.
-6. **Retakes.** The demo email and the meeting request are the same every take. The email collapses into the same item,
-   and the meeting reply only touches the WorkBench sandbox, which is in memory. An approval you leave unanswered counts
-   as "no" after 10 minutes, so don't approve stale ones on the watch.
+5. **Retakes.** The demo email and the meeting request are the same every take. The email collapses into the same item
+   (Add data then says "already in memory"), and the meeting reply only touches the WorkBench sandbox, which is in
+   memory. Beat 9 approves the reply on the page, which writes one human approval to the ledger each take.
 
 ---
 
@@ -61,7 +63,7 @@ minute. The **[wait]** marks are where a model is working; keep talking over the
 
 ### Beat 4 · Add data (0:55–1:25)
 
-> **[→]** New information arrives all the time. Here's an email from Stinson. *(it types in)*
+> **[→]** New information arrives all the time. Here's an email from Shirley. *(it types in)*
 > It's searchable in milliseconds: stored, split, embedded. Then the judge makes a one-token decision: is this worth
 > remembering? **[wait]** If yes, the big model pulls out the commitment and the meeting, and code rejects any quote
 > that isn't really in the email. It all lands in an Obsidian vault the owner can edit.
@@ -101,13 +103,14 @@ that's best at it."
 
 *On screen: the results card (96.6%, 84%, 40% → 6.7%, 13 ms).*
 
-### Beat 9 · On your wrist (2:45–3:05): film the watch here
+### Beat 9 · Your approval (2:45–3:05)
 
-> **[→]** And that meeting reply is still waiting, on my wrist too. *(film the watch: the approval card, then tap
-> Approve)* Approved on the watch. The email goes out, and the approval goes into the ledger as a human decision.
+> **[→]** That meeting reply is still waiting on me. The same card is on my paired smartwatch, so I can approve it from
+> my wrist; here I'll do it on the page. Approved: the reply goes out, and my decision goes into the ledger as a human
+> one, next to every model's.
 
-*On screen: the card flips to "Approved on the watch (SM-R905F)". Your phone clip shows the tap. In the edit, cut to
-the phone clip for the tap, then back to the screen.*
+*On screen: the waiting card, then Approve; it flips to "Approved · 3.9 s · recorded as H in the ledger", and the top
+bar drops to "0 waiting".*
 
 ### Beat 10 · Close (3:05–3:10)
 
@@ -117,10 +120,9 @@ the phone clip for the tap, then back to the screen.*
 
 ## Putting it together
 
-- **Tracks:** the screen recording (beats 1–10), the phone clip of the watch (beat 9), and your voice if you recorded
-  it separately.
-- **Editor:** iMovie is enough. Put the screen recording on the main track, lay the watch clip over beat 9 as a
-  cutaway or picture-in-picture, and put the voice underneath. Trim the **[wait]** gaps if you run long.
+- **Tracks:** the screen recording (beats 1–10) and your voice. The smartwatch demo is a separate recording.
+- **Editor:** iMovie is enough. Put the screen recording on the main track and the voice underneath. Trim the
+  **[wait]** gaps if you run long.
 - **Target:** about 3:00. If you need to cut, beat 5 (agents) is the easiest to shorten; beat 7 (audit) can merge into
   beat 8.
 

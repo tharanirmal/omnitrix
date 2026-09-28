@@ -7,12 +7,12 @@ import * as ui from "./lib/ui.js";
 import { api } from "./lib/api.js";
 
 const QUESTION = "Where and at what time did Vince suggest meeting Michael Garberding on Tuesday?";
-const EMAIL = {
-  title: "LJM model follow-up",
-  from: "stinson.gibner@enron.com",
-  date: "2001-03-12",
-  text: "Vince,\n\nThe revised LJM valuation model is ready. I will send it to you by Thursday, and let's meet on " +
-    "Friday at 2 pm in EB1938 with Paulo to walk through it.\n\nStinson",
+const EMAIL = {                                  // the same text again collapses into the same item (read once)
+  title: "Kenneth's interview",
+  from: "shirley.crenshaw@enron.com",
+  date: "2001-04-02",
+  text: "Vince,\n\nKenneth's interview is confirmed for Monday at 10 am in EB1972. I will send the interview " +
+    "schedule to Stinson and Paulo by Friday, and Tanya will join you both for lunch afterwards.\n\nShirley",
 };
 const MEETING_EMAIL = "00000066";                 // Nia Johnson asks for a project checkpoint (WorkBench inbox)
 
@@ -84,7 +84,8 @@ const BEATS = [
 
   { cap: ["Meeting reply", "Librarian → Researcher → Planner → Writer → Fact Checker. Nothing leaves without your approval."],
     run: async () => {
-      await see($("#act-h"));
+      await go("#/agents");                           // a reshoot from this beat starts on another view
+      await see(await until(() => $("#act-h")));
       [...document.querySelectorAll(".panel-head [role=radio]")].find((b) => b.textContent === "Meeting reply")?.click();
       const pick = await until(() => { const s = $(".meeting-form select"); return s && s.querySelector(`option[value="${MEETING_EMAIL}"]`) && s; });
       pick.value = MEETING_EMAIL;
@@ -93,7 +94,7 @@ const BEATS = [
       const waiting = document.querySelectorAll(".approval-list [data-run]").length;
       $(".meeting-form").requestSubmit();
       await until(() => document.querySelectorAll(".approval-list [data-run]").length > waiting, 120000);
-      await see($("#wait-h"));
+      await see($(".approval-list [data-run]:last-child"));
     } },
 
   { cap: ["Audit", "Every judgement is hash-chained, and the ledger is also the judge's training data."],
@@ -107,11 +108,15 @@ const BEATS = [
 
   { cap: null, run: async () => showResults() },
 
-  { cap: ["On your wrist", "The meeting reply is waiting. The watch gets the same approval."],
+  { cap: ["Your approval", "Approve here, or on your paired watch. Either way it goes into the ledger as a human decision."],
     run: async () => {
       hideResults();
       await go("#/agents");
-      await see(await until(() => $("#wait-h")));
+      const card = await until(() => $(".approval-list [data-run]:last-child"));
+      await see(card);
+      await sleep(2500);
+      button(card, "Approve")?.click();
+      await until(() => card.classList.contains("resolved") || !card.isConnected, 20000);   // "Approved · … as H"
     } },
 
   { cap: ["engram", "Local models, your data, your last word. Every decision is on the ledger."],
@@ -133,9 +138,10 @@ function showResults() {
     ui.h("div", { class: "grid" }, ...RESULTS.map(([big, what, sub]) => ui.h("div", null,
       ui.h("b", { class: "eg-mono", text: big }), ui.h("span", { text: what }), ui.h("small", { text: sub })))));
   document.body.append(card);
+  document.body.classList.add("demo-dim");
   if (!ui.reducedMotion()) ui.anim(card, [{ opacity: 0, transform: "translateY(12px)" }, { opacity: 1, transform: "none" }], { duration: 400, easing: ui.css("ease-standard") });
 }
-function hideResults() { card?.remove(); card = null; }
+function hideResults() { card?.remove(); card = null; document.body.classList.remove("demo-dim"); }
 
 /* ------------------------------------------------------------------------------------------------ the presenter */
 export function start() {
@@ -161,6 +167,7 @@ export function start() {
     if (document.body.dataset.mode === "dashboard") document.activeElement?.blur?.();   // → must reach us next
     busy = false;
   }
+  window.engramDemo = { get beat() { return i + 1; }, get busy() { return busy; }, beats: BEATS.length };   // for a recorder
   addEventListener("keydown", (e) => {
     if (e.target.matches?.("input, textarea, select") && e.target.type !== "radio") return;   // typing a passphrase
     if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); next(); }
