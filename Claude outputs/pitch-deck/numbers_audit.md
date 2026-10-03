@@ -5,12 +5,13 @@ Every number on the slides, and the fact from the brief (or the cited market sou
 ## Slide 1: Intro
 No numbers apart from "Track 1".
 
-## Slide 2: Problem
+## Slide 2: The Problem
 | On slide | Source |
 |---|---|
-| 97.8%, 10,134 memories | Problem: Mem0 audit, 10,134 memories, 97.8% junk |
-| 41%, ~3,950 facts, 3 of 4 audited wrong | Problem: Graphiti judge invalidated 41% of ~3,950 facts; 3 of 4 audited cases wrong |
-| 7.5% | Privacy: local + cloud delegation leaks on 7.5% of queries (PAPILLON) |
+| Context fragmentation (no number) | Problem: work life buried in email, meetings and notes |
+| 97.8% junk in a Mem0 audit | Problem: Mem0 audit of 10,134 memories, 97.8% junk |
+| 41% Graphiti facts invalidated; 3 of 4 audited invalidations wrong | Problem: Graphiti's small-model judge invalidated 41% of ~3,950 facts; 3 of 4 audited cases wrong |
+| 7.5% of queries leak private data | Privacy: local + cloud delegation leaks on 7.5% of queries (PAPILLON) |
 
 ## Slide 3: Our answer
 | On slide | Source |
@@ -65,9 +66,8 @@ No numbers apart from "Track 1".
 Only the reference details given in the brief, plus the market sources above.
 
 ## Slide 9: Thank you
-No numbers.
+No numbers. The team contact card is an icon only; add names or an email when ready.
 
 ## TODOs left
-- Slide 9: **TODO: team contact** (as the brief asked).
 - Slide 6 notes: SAM is not yet filtered to people whose laptops can run local models; no citable figure was found.
 - Market caveats (in the notes): the Gartner count is a 2019 forecast for 2023, and the ₹1,999 price dates from August 2025, so the TAM is indicative.
